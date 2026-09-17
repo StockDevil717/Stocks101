@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI // The Next Evolution</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background: #05070d;
+    color: #f4f7ff;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+/* Background grid */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 200, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 200, 255, 0.045) 1px, transparent 1px);
+    background-size: 45px 45px;
+    pointer-events: none;
+    z-index: -2;
+}
+/* Glow */
+body::after {
+    content: "";
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: rgba(0, 180, 255, 0.08);
+    filter: blur(100px);
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: -1;
+}
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5, 7, 13, 0.7);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 200, 255, 0.15);
+    z-index: 100;
+}
+.logo {
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #62ddff;
+    text-shadow: 0 0 15px #00bfff;
+}
+nav a {
+    color: #aeb8c8;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 13px;
+    transition: 0.3s;
+}
+nav a:hover {
+    color: #62ddff;
+}
+/* Hero */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 80px;
+}
+.hero-content {
+    max-width: 900px;
+}
+.tag {
+    display: inline-block;
+    padding: 9px 18px;
+    border: 1px solid rgba(0, 210, 255, 0.4);
+    border-radius: 30px;
+    color: #62ddff;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+    background: rgba(0, 200, 255, 0.05);
+}
+h1 {
+    font-size: clamp(55px, 10vw, 120px);
+    line-height: 0.9;
+    letter-spacing: -6px;
+    margin-bottom: 30px;
+}
+.gradient {
+    background: linear-gradient(90deg, #ffffff, #52dfff, #8b7cff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.hero p {
+    max-width: 650px;
+    margin: auto;
+    color: #9ba8bb;
+    line-height: 1.8;
+    font-size: 17px;
+}
+.button {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 15px 30px;
+    border-radius: 8px;
+    background: #5edfff;
+    color: #02050a;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
+    transition: 0.3s;
+}
+.button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 45px rgba(0, 210, 255, 0.6);
+}
+/* Sections */
+section {
+    padding: 110px 8%;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.section-title span {
+    color: #55dcff;
+    font-size: 12px;
+    letter-spacing: 4px;
+}
+.section-title h2 {
+    font-size: clamp(35px, 5vw, 60px);
+    margin-top: 12px;
+}
+.section-title p {
+    color: #8995a8;
+    max-width: 650px;
+    margin: 20px auto;
+    line-height: 1.7;
+}
+/* Cards */
+.grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+.card {
+    padding: 32px;
+    min-height: 230px;
+    background: linear-gradient(145deg, rgba(17, 25, 40, 0.8), rgba(6, 10, 18, 0.8));
+    border: 1px solid rgba(110, 220, 255, 0.13);
+    border-radius: 18px;
+    transition: 0.35s;
+    position: relative;
+    overflow: hidden;
+}
+.card::before {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(0, 200, 255, 0.08);
+    filter: blur(40px);
+    top: -70px;
+    right: -70px;
+}
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(80, 220, 255, 0.5);
+    box-shadow: 0 15px 45px rgba(0, 180, 255, 0.08);
+}
+.icon {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+.card p {
+    color: #8f9bad;
+    line-height: 1.7;
+    font-size: 14px;
+}
+/* Big statement */
+.statement {
+    max-width: 1050px;
+    margin: auto;
+    text-align: center;
+    padding: 70px 30px;
+    border-top: 1px solid rgba(90, 220, 255, 0.2);
+    border-bottom: 1px solid rgba(90, 220, 255, 0.2);
+}
+.statement h2 {
+    font-size: clamp(32px, 5vw, 65px);
+    line-height: 1.1;
+}
+.statement p {
+    max-width: 750px;
+    margin: 25px auto 0;
+    color: #9aa7ba;
+    line-height: 1.8;
+}
+/* Future timeline */
+.timeline {
+    max-width: 900px;
+    margin: auto;
+}
+.timeline-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 30px;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.year {
+    color: #5edfff;
+    font-weight: bold;
+    font-size: 18px;
+}
+.timeline-item h3 {
+    margin-bottom: 8px;
+}
+.timeline-item p {
+    color: #8f9bad;
+    line-height: 1.7;
+}
+/* Quote */
+.quote {
+    text-align: center;
+    max-width: 900px;
+    margin: auto;
+}
+.quote h2 {
+    font-size: clamp(30px, 5vw, 55px);
+    line-height: 1.2;
+}
+.quote p {
+    margin-top: 25px;
+    color: #69778b;
+}
+/* Footer */
+footer {
+    padding: 50px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: #596578;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+/* Mobile */
+@media(max-width: 650px) {
+    nav {
+        padding: 18px 5%;
+    }
+    nav a {
+        margin-left: 10px;
+        font-size: 10px;
+    }
+    h1 {
+        letter-spacing: -3px;
+    }
+    section {
+        padding: 80px 6%;
+    }
+    .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+</style>
+</head>
+<body>
+<nav>
+    <div class="logo">AI//CORE</div>
+    <div>
+        <a href="#why">WHY AI</a>
+        <a href="#future">FUTURE</a>
+        <a href="#impact">IMPACT</a>
+    </div>
+</nav>
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-content">
+        <div class="tag">THE NEXT EVOLUTION OF HUMANITY</div>
+        <h1>
+            INTELLIGENCE<br>
+            <span class="gradient">AMPLIFIED.</span>
+        </h1>
+        <p>
+            Artificial Intelligence is no longer science fiction.
+            It is a tool capable of helping humanity solve problems,
+            discover new possibilities and build a smarter future.
+        </p>
+        <a class="button" href="#why">EXPLORE THE FUTURE ↓</a>
+    </div>
+</header>
+<!-- WHY AI -->
+<section id="why">
+    <div class="section-title">
+        <span>WHY AI MATTERS</span>
+        <h2>Human Potential × AI</h2>
+        <p>
+            AI does not have to replace human creativity.
+            Used responsibly, it can amplify what people are already
+            capable of doing.
+        </p>
+    </div>
+    <div class="grid">
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Work Faster</h3>
+            <p>
+                AI can automate repetitive tasks, analyse information
+                quickly and help people spend more time on meaningful
+                work.
+            </p>
+        </div>
+        <div class="card">
+            <div class="icon">🧠</div>
+            <h3>Learn Anything</h3>
+            <p>
+                AI can act as a personalised learning assistant,
+                explaining difficult ideas in different ways and
+                adapting to individual needs.
+            </p>
+        </div>
+        <div class="card">
+            <div class="icon">🔬</div>
+            <h3>Accelerate Science</h3>
+            <p>
+                AI can help researchers analyse enormous amounts of
+                information and identify patterns that might otherwise
+                take much longer to discover.
+            </p>
+        </div>
+        <div class="card">
+            <div class="icon">🌍</div>
+            <h3>Solve Problems</h3>
+            <p>
+                From climate modelling to engineering and logistics,
+                AI can help humans explore solutions to complicated
+                global challenges.
+            </p>
+        </div>
+        <div class="card">
+            <div class="icon">🎨</div>
+            <h3>Unlock Creativity</h3>
+            <p>
+                AI can help people brainstorm ideas, create prototypes,
+                experiment with designs and turn concepts into reality.
+            </p>
+        </div>
+        <div class="card">
+            <div class="icon">🚀</div>
+            <h3>Explore New Frontiers</h3>
+            <p>
+                AI could become an important tool in robotics, space
+                exploration, medicine, engineering and many other fields.
+            </p>
+        </div>
+    </div>
+</section>
+<!-- STATEMENT -->
+<section>
+    <div class="statement">
+        <h2>
+            AI IS A TOOL.<br>
+            <span class="gradient">THE FUTURE DEPENDS ON HOW WE USE IT.</span>
+        </h2>
+        <p>
+            The goal should not simply be to create increasingly powerful
+            machines. The goal is to use technology responsibly to expand
+            human knowledge, creativity and opportunity.
+        </p>
+    </div>
+</section>
+<!-- IMPACT -->
+<section id="impact">
+    <div class="section-title">
+        <span>AI × EVERYDAY LIFE</span>
+        <h2>How AI Could Change Our Lives</h2>
+        <p>
+            AI is already appearing in everyday technology.
+            Its future impact could reach almost every part of society.
+        </p>
+    </div>
+    <div class="grid">
+        <div class="card">
+            <div class="icon">🏥</div>
+            <h3>Healthcare</h3>
+            <p>
+                AI can support doctors and researchers by analysing
+                medical information and assisting with research and
+                diagnosis.
+            </p>
+        </div>
+        <div class="card">
+            <div class="icon">🏫</div>
+            <h3>Education</h3>
+            <p>
+                Students could receive personalised explanations,
+                practice material and learning support whenever they
+                need it.
+            </p>
+        </div>
+        <div class="card">
+            <div class="icon">🏙️</div>
+            <h3>Smart Cities</h3>
+            <p>
+                AI could help optimise traffic, energy use,
+                infrastructure and public services.
+            </p>
+        </div>
+        <div class="card">
+            <div class="icon">🤖</div>
+            <h3>Robotics</h3>
+            <p>
+                More capable AI systems could allow robots to perform
+                useful tasks in dangerous, difficult or inaccessible
+                environments.
+            </p>
+        </div>
+        <div class="card">
+            <div class="icon">💡</div>
+            <h3>Innovation</h3>
+            <p>
+                Faster experimentation and analysis could help inventors
+                develop new technologies and products.
+            </p>
+        </div>
+        <div class="card">
+            <div class="icon">🌌</div>
+            <h3>Space</h3>
+            <p>
+                AI could assist spacecraft, scientific research and
+                autonomous exploration far beyond Earth.
+            </p>
+        </div>
+    </div>
+</section>
+<!-- FUTURE -->
+<section id="future">
+    <div class="section-title">
+        <span>LOOKING AHEAD</span>
+        <h2>A Possible AI Future</h2>
+        <p>
+            The exact future cannot be predicted, but AI development
+            could transform how humans work, learn and create.
+        </p>
+    </div>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="year">TODAY</div>
+            <div>
+                <h3>AI Assistants</h3>
+                <p>
+                    People use AI for writing, coding, research,
+                    creativity, education and everyday tasks.
+                </p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="year">NEXT</div>
+            <div>
+                <h3>AI Everywhere</h3>
+                <p>
+                    AI could become increasingly integrated into
+                    software, devices, workplaces and scientific tools.
+                </p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="year">FUTURE</div>
+            <div>
+                <h3>Human + Machine</h3>
+                <p>
+                    Humans may increasingly work alongside intelligent
+                    systems, combining human judgement with machine
+                    speed and analysis.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FINAL -->
+<section>
+    <div class="quote">
+        <h2>
+            “The most powerful technology
+            is the technology that expands
+            what humanity can accomplish.”
+        </h2>
+        <p>
+            AI should be developed and used with responsibility,
+            human oversight and respect for people.
+        </p>
+    </div>
+</section>
+<footer>
+    AI//CORE — BUILDING THE FUTURE WITH INTELLIGENCE
+</footer>
+</body>
+</html>
